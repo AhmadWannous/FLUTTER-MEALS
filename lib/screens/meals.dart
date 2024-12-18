@@ -7,12 +7,16 @@ import 'package:meals/widgets/meal_item.dart';
 class MealsScreen extends StatelessWidget {
   const MealsScreen({
     super.key,
-    required this.title,
+    this.title,
     required this.meals,
+    required this.onToggelFavorite,
+    required this.onToggelNotInterested,
   });
 
-  final String title;
+  final String? title;
   final List<Meal> meals;
+  final void Function(Meal meal) onToggelFavorite;
+  final void Function(Meal meal) onToggelNotInterested;
 
   void selectMeal(BuildContext context, Meal meal) {
     // Navigator.pop(context); //pop a screen off manually
@@ -20,6 +24,8 @@ class MealsScreen extends StatelessWidget {
       MaterialPageRoute(
         builder: (ctx) => MealDetailsScreen(
           meal: meal,
+          onToggelFavorite: onToggelFavorite,
+          onToggelNotInterested: onToggelNotInterested,
         ),
       ),
     );
@@ -33,7 +39,7 @@ class MealsScreen extends StatelessWidget {
         children: [
           Text(
             'Uh oh...nothing here!',
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+            style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
           ),
@@ -61,9 +67,14 @@ class MealsScreen extends StatelessWidget {
         ),
       );
     }
+
+    if (title == null) {
+      return content;
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(title!),
       ),
       body: content,
     );
