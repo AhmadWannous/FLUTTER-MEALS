@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:meals/models/meal.dart';
+import 'package:meals/provider/not_favorites_provider.dart';
 import 'package:meals/screens/categories.dart';
 import 'package:meals/screens/filters.dart';
 import 'package:meals/screens/meals.dart';
 import 'package:meals/widgets/main_drawer.dart';
 import 'package:meals/provider/meals_provider.dart';
+import 'package:meals/provider/favorites_provider.dart';
 
 const kInitialFilters = {
   Filter.glutenFree: false,
@@ -25,49 +26,7 @@ class TabsScreen extends ConsumerStatefulWidget {
 
 class _TabsScreenState extends ConsumerState<TabsScreen> {
   int _selectedPageIndex = 0;
-  final List<Meal> _favoriteMeal = [];
-  final List<Meal> _notInterested = [];
   Map<Filter, bool> _selectedFilters = kInitialFilters;
-
-  void _showInfoMessage(String message) {
-    ScaffoldMessenger.of(context).clearSnackBars();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-      ),
-    );
-  }
-
-  void _toggelMealFavoritesStatus(Meal meal) {
-    final isExisting = _favoriteMeal.contains(meal);
-
-    if (isExisting) {
-      setState(() {
-        _favoriteMeal.remove(meal);
-      });
-      _showInfoMessage('Meal is no longer a favorite.');
-    } else {
-      setState(() {
-        _favoriteMeal.add(meal);
-      });
-      _showInfoMessage('Marked as a favorite.');
-    }
-  }
-
-  void _toggelMealNotInterestedStatus(Meal meal) {
-    final isNotInterest = _notInterested.contains(meal);
-    if (isNotInterest) {
-      setState(() {
-        _notInterested.remove(meal);
-      });
-      _showInfoMessage('Meal is no longer a not interested.');
-    } else {
-      setState(() {
-        _notInterested.add(meal);
-      });
-      _showInfoMessage('Marked as a not interested.');
-    }
-  }
 
   void _selectedPage(int index) {
     setState(() {
@@ -110,26 +69,22 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
       return true;
     }).toList();
     Widget activePage = CategoriesScreen(
-      onToggelFavorite: _toggelMealFavoritesStatus,
-      onToggelNotInterested: _toggelMealNotInterestedStatus,
       availableMeals: availableMeals,
     );
     var activePageTitle = 'Categories';
 
     if (_selectedPageIndex == 1) {
+      final favoriteMeals = ref.watch(favoriteMealsProvider);
       activePage = MealsScreen(
-        meals: _favoriteMeal,
-        onToggelFavorite: _toggelMealFavoritesStatus,
-        onToggelNotInterested: _toggelMealNotInterestedStatus,
+        meals: favoriteMeals,
       );
       activePageTitle = 'Your Favorites';
     }
 
     if (_selectedPageIndex == 2) {
+      final notFavoriteMeals = ref.watch(notFavoriteMealsProvider);
       activePage = MealsScreen(
-        meals: _notInterested,
-        onToggelFavorite: _toggelMealFavoritesStatus,
-        onToggelNotInterested: _toggelMealNotInterestedStatus,
+        meals: notFavoriteMeals,
       );
       activePageTitle = 'Not Interested';
     }
