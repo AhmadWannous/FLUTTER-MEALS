@@ -20,3 +20,33 @@ Meals App is a beautifully designed Flutter application that allows users to exp
 ✅ State Management (Riverpod) – Efficient app state handling
 ✅ UI/UX Design – Using Google Fonts & Transparent Images
 ✅ Navigation & Routing – Managing multiple screens smoothly
+
+## 📸 App Screenshots
+
+<table>
+  <tr>
+    <td><b>Main Drawer</b></td>
+    <td><b>Home</b></td>
+    <td><b>Ingredient & Steps</b></td>
+    <td><b>Foods list</b></td>
+  </tr>
+  
+  <tr>
+    <td><img src="assets/screenshots/main drawer.png" width="250"></td>
+    <td><img src="assets/screenshots/home.png" width="250"></td>
+    <td><img src="assets/screenshots/ingredient & steps.png" width="250"></td>
+    <td><img src="assets/screenshots/Foods list.png" width="250"></td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td><b>Favorite</b></td>
+    <td><b>Not Interested</b></td>
+  </tr>
+  
+  <tr>
+    <td><img src="assets/screenshots/add to favorits.png" width="235"><img src="assets/screenshots/favorite.png" width="235"></td>
+    <td><img src="assets/screenshots/add to not interested.png" width="235"><img src="assets/screenshots/not interested.png" width="235"></td>
+  </tr>
+</table>
