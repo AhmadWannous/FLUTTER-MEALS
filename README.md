@@ -46,7 +46,7 @@ Meals App is a beautifully designed Flutter application that allows users to exp
   </tr>
   
   <tr>
-    <td><img src="assets/screenshots/add to favorits.png" width="235"><img src="assets/screenshots/favorite.png" width="235"></td>
-    <td><img src="assets/screenshots/add to not interested.png" width="235"><img src="assets/screenshots/not interested.png" width="235"></td>
+    <td><img src="assets/screenshots/add to favorits.png" width="230"><img src="assets/screenshots/favorite.png" width="230"></td>
+    <td><img src="assets/screenshots/add to not interested.png" width="230"><img src="assets/screenshots/not interested.png" width="230"></td>
   </tr>
 </table>
